@@ -1,0 +1,238 @@
+/* ============================================
+   🚀 Services Page Styles
+   ============================================ */
+
+/* Services Hero */
+.services-hero {
+  padding-top: calc(var(--header-height) + 4rem);
+}
+
+/* Services Grid */
+.services-grid-section {
+  padding-top: 0;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+}
+
+.service-card {
+  display: flex;
+  flex-direction: column;
+  padding: 3rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  transition: all var(--transition-base);
+  box-shadow: var(--shadow);
+}
+
+.service-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-xl);
+  border-color: var(--primary-light);
+}
+
+.service-card-header {
+  margin-bottom: 1.5rem;
+}
+
+.service-card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 5.5rem;
+  height: 5.5rem;
+  border-radius: var(--radius-lg);
+  background: rgba(14, 165, 233, 0.1);
+  color: var(--primary);
+  font-size: 2.4rem;
+  margin-bottom: 1.5rem;
+  transition: all var(--transition-base);
+}
+
+.service-card:hover .service-card-icon {
+  background: var(--primary);
+  color: #fff;
+  transform: scale(1.1) rotate(5deg);
+}
+
+.service-card h3 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.service-card-desc {
+  font-size: 1.4rem;
+  color: var(--muted);
+  line-height: 1.7;
+  margin-bottom: 2rem;
+  flex: 1;
+}
+
+.service-card-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.service-card-features li {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 1.3rem;
+  color: var(--muted);
+}
+
+.feature-arrow {
+  font-size: 1rem;
+  color: var(--primary);
+  flex-shrink: 0;
+}
+
+.service-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  gap: 1rem;
+}
+
+.service-price {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+/* Process Section */
+.process-section {
+  background: var(--bg-alt);
+}
+
+.process-steps {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0;
+  max-width: 90rem;
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+
+.process-step {
+  text-align: center;
+  flex: 1;
+  min-width: 18rem;
+  padding: 2rem;
+}
+
+.step-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 6rem;
+  height: 6rem;
+  margin: 0 auto 1.5rem;
+  border-radius: var(--radius-full);
+  background: var(--gradient-primary);
+  color: #fff;
+  font-size: 2rem;
+  font-weight: 800;
+  box-shadow: 0 8px 25px rgba(14, 165, 233, 0.3);
+}
+
+.process-step h4 {
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.8rem;
+}
+
+.process-step p {
+  font-size: 1.3rem;
+  color: var(--muted);
+  margin: 0;
+  line-height: 1.5;
+  max-width: 20rem;
+  margin: 0 auto;
+}
+
+.process-connector {
+  width: 4rem;
+  height: 2px;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  margin-top: 4rem;
+  flex-shrink: 0;
+}
+
+/* Services CTA */
+.services-cta {
+  padding-bottom: 0;
+}
+
+.services-cta .cta-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+}
+
+.services-cta .cta-content h2 {
+  color: var(--text);
+}
+
+.services-cta .cta-content p {
+  color: var(--muted);
+}
+
+/* Responsive */
+@media (max-width: 1068px) {
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .process-steps {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .process-connector {
+    width: 2px;
+    height: 3rem;
+    margin: 0;
+  }
+
+  .process-step {
+    min-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .services-hero {
+    padding-top: calc(var(--header-height) + 2rem);
+  }
+
+  .service-card-footer {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
+
+  .service-card-footer .btn {
+    width: 100%;
+  }
+}
+

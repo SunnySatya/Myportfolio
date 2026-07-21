@@ -8,15 +8,13 @@ try {
 }
 
 const URI = process.env.MONGO_URI;
-const hasPlaceholder = /<[^>]+>/.test(URI || "");
-
-if (!URI || hasPlaceholder) {
-  throw new Error(
-    "MONGO_URI is missing or still contains placeholder values. Check your .env file.",
-  );
-}
 
 const connectDb = async () => {
+  if (!URI) {
+    console.warn("MONGO_URI is not set. Skipping database connection.");
+    return;
+  }
+
   try {
     await mongoose.connect(URI, {
       serverSelectionTimeoutMS: 10000,

@@ -1,3 +1,4 @@
+const path = require("path");
 require("dotenv").config({ path: __dirname + "/.env" });
 const express = require("express");
 const cors = require("cors");
@@ -14,6 +15,8 @@ const allowedOrigins = [
   "http://localhost:3000",
   "http://127.0.0.1:5173",
   "http://127.0.0.1:4173",
+  // Add your Render domain here after deployment
+  // e.g., "https://myportfolio.onrender.com"
 ];
 
 app.use(
@@ -54,6 +57,23 @@ app.use("/api/auth", router);
 app.use("/api/form", contactRouter);
 app.use("/api/admin", adminRouter);
 
+// ---- Serve React build in production ----
+const clientDistPath = path.join(__dirname, "..", "client", "dist");
+app.use(express.static(clientDistPath));
+
+// SPA fallback: serve index.html for any non-API request (client-side routing)
+app.get("*", (req, res, next) => {
+  // Skip API routes
+  if (req.path.startsWith("/api/")) {
+    return next();
+  }
+  res.sendFile(path.join(clientDistPath, "index.html"), (err) => {
+    if (err) {
+      next();
+    }
+  });
+});
+
 // Global error handling middleware
 app.use((err, req, res, next) => {
   console.error("Unhandled Error:", err.message || err);
@@ -64,7 +84,7 @@ app.use((err, req, res, next) => {
   });
 });
 
-// 404 handler for unknown routes
+// 404 handler for unknown API routes
 app.use((req, res) => {
   res.status(404).json({ message: `Route ${req.originalUrl} not found` });
 });

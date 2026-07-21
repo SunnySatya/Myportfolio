@@ -1,0 +1,34 @@
+name: my-portfolio
+service:
+  name: web
+  port: 5000
+
+  # Build configuration
+  build:
+    command: npm run build
+    requirements:
+      - node
+
+  # Run configuration
+  run:
+    command: npm start
+
+  # Environment variables
+  env:
+    - key: NODE_ENV
+      value: production
+    - key: MONGO_URI
+      secret: true
+    - key: PORT
+      value: "5000"
+
+  # Health check
+  health:
+    path: /api/health
+    initialDelaySeconds: 10
+    periodSeconds: 15
+
+  # Scaling
+  scaling:
+    min: 1
+    max: 1

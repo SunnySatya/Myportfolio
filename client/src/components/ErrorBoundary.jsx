@@ -38,7 +38,7 @@ class ErrorBoundary extends Component {
                   An unexpected error occurred. Please try refreshing the page
                   or go back to the homepage.
                 </p>
-                {process.env.NODE_ENV === "development" && (
+                {import.meta.env.DEV && (
                   <details className="error-details">
                     <summary>Error Details</summary>
                     <pre>{this.state.error?.message}</pre>

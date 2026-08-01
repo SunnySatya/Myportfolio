@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet-async";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
+import ScrollToTopRoute from "./components/ScrollToTopRoute";
 import Toast from "./components/Toast";
 import ErrorBoundary from "./components/ErrorBoundary";
 import PageLoader from "./components/PageLoader";
@@ -81,6 +82,7 @@ const App = () => {
             </Suspense>
           </main>
           <Footer />
+          <ScrollToTopRoute />
           <ScrollToTop />
           <Toast />
         </ErrorBoundary>

@@ -39,24 +39,24 @@ const About = () => {
   const timeline = [
     {
       year: "2025",
-      title: "Senior Frontend Developer",
+      title: "Mern Stack Developer",
       company: "Freelance / Agency",
       desc: "Leading frontend architecture for enterprise clients, building scalable React applications.",
     },
     {
       year: "2023",
-      title: "Full Stack Developer",
+      title: "Junior Developer",
       company: "Tech Startup",
       desc: "Built full-stack web applications using React, Node.js, and MongoDB from the ground up.",
     },
     {
-      year: "2022",
-      title: "Junior Developer",
+      year: "2023",
+      title: "Frontend Developer",
       company: "Digital Agency",
       desc: "Developed responsive websites and React components for diverse client projects.",
     },
     {
-      year: "2021",
+      year: "2022",
       title: "Started Coding",
       company: "Self-Taught Journey",
       desc: "Began learning web development. Completed multiple bootcamps and built personal projects.",
@@ -99,7 +99,11 @@ const About = () => {
             <div className="about-hero-visual animate-fade-in-right">
               <div className="about-image-card">
                 <div className="about-image-placeholder">
-                  <span className="about-initials">SD</span>
+                  <img
+                    src="images/full profile.png"
+                    alt="Shani Devpriya - Full Profile"
+                    className="about-full-image"
+                  />
                 </div>
                 <div className="about-image-badges">
                   <span className="badge-exp">3+ Years</span>

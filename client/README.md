@@ -1,12 +1,31 @@
-# React + Vite
+# Portfolio Client
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React frontend for the Shani Devpriya portfolio website. Built with Vite, React 19, and React Router.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Modern, responsive UI with dark/light mode toggle
+- Lazy-loaded pages for code splitting
+- Contact form wired to the Express backend
+- User registration & login (JWT-free, MongoDB-backed)
+- Admin dashboard for viewing users and contact messages
+- SEO meta tags via `react-helmet-async`
 
-## Expanding the ESLint configuration
+## Scripts
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+| Command           | Description                       |
+| ----------------- | --------------------------------- |
+| `npm install`     | Install dependencies              |
+| `npm run dev`     | Start Vite dev server (port 5173) |
+| `npm run build`   | Production build to `dist/`       |
+| `npm run preview` | Preview the production build      |
+| `npm run lint`    | Run ESLint                        |
+
+## API Proxy
+
+During development, the Vite dev server proxies `/api` requests to the backend at `http://localhost:5000` (see `vite.config.js`).
+
+## Backend
+
+The API server lives in the `server/` directory at the project root. See the root `README.md` for full-stack setup instructions.
+</content>

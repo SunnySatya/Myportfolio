@@ -74,11 +74,11 @@ const hasClientBuild = fs.existsSync(indexPath);
 if (hasClientBuild) {
   app.use(express.static(clientDistPath));
 
-  // Express 5 safe catch-all for non-API routes
   app.get(/^(?!\/api).*/, (req, res, next) => {
     if (req.path.startsWith("/api/")) {
       return next();
     }
+
     if (req.method !== "GET" && req.method !== "HEAD") {
       return next();
     }
@@ -100,7 +100,13 @@ if (hasClientBuild) {
 
 // 404 handler for unknown API routes
 app.use((req, res) => {
-  res.status(404).json({ message: `Route ${req.originalUrl} not found` });
+  if (req.path.startsWith("/api/")) {
+    return res
+      .status(404)
+      .json({ message: `Route ${req.originalUrl} not found` });
+  }
+
+  return res.status(404).send("Not Found");
 });
 
 // Global error handling middleware (must always be registered last)

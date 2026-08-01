@@ -88,7 +88,7 @@ const Footer = () => {
                   <FaTwitter />
                 </a>
                 <a
-                  href="mailto:hello@shanidevpriya.dev"
+                  href="mailto:sunnysatya4@gmail.com"
                   className="social-link"
                   aria-label="Email"
                 >

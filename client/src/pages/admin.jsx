@@ -110,7 +110,7 @@ const Admin = () => {
   }
 
   // Check if not admin (redirected)
-  if (!localStorage.getItem("isAdmin") === "true") return null;
+  if (localStorage.getItem("isAdmin") !== "true") return null;
 
   return (
     <section className="admin-page page-section">

@@ -105,6 +105,9 @@ const skills = [
   { name: "Express", level: 78, color: "#00cc88" },
   { name: "Git", level: 75, color: "#85cc00" },
   { name: "Github", level: 75, color: "#cc007e" },
+  { name: "Tailwind css", level: 73, color: "#8b00cc" },
+  { name: "Redux", level: 77, color: "#11cc00" },
+  { name: "Axios", level: 77, color: "#ccb800" },
 ];
 
 // Services Data
@@ -172,17 +175,17 @@ const Home = () => {
               {/* Stats Strip */}
               <div className="hero-stats">
                 <div className="stat-item">
-                  <span className="stat-number">3+</span>
+                  <span className="stat-number">1+</span>
                   <span className="stat-label">Years Exp</span>
                 </div>
                 <div className="stat-divider" />
                 <div className="stat-item">
-                  <span className="stat-number">50+</span>
+                  <span className="stat-number">10+</span>
                   <span className="stat-label">Projects</span>
                 </div>
                 <div className="stat-divider" />
                 <div className="stat-item">
-                  <span className="stat-number">30+</span>
+                  <span className="stat-number">12+</span>
                   <span className="stat-label">Clients</span>
                 </div>
               </div>
@@ -192,15 +195,15 @@ const Home = () => {
               <div className="hero-image-wrapper">
                 <div className="hero-image-glow" />
                 <img
-                  src="images/webdev.png"
-                  alt="Shani Devpriya - Frontend Developer"
+                  src="images/short profile.png"
+                  alt="Shani Devpriya - Mern Stack Developer"
                   className="hero-image"
                 />
                 <div className="hero-floating-badge badge-1">
-                  <FaCode /> React
+                  <FaCode /> Mern Stack
                 </div>
                 <div className="hero-floating-badge badge-2">
-                  <FaLaptopCode /> UI/UX
+                  <FaLaptopCode /> Full Stack Developer
                 </div>
               </div>
             </div>
@@ -221,25 +224,25 @@ const Home = () => {
           <div className="analytics-grid">
             <div className="analytics-card">
               <h3>
-                <AnimatedCounter end={50} suffix="+" />
+                <AnimatedCounter end={5} suffix="+" />
               </h3>
               <p>Registered Companies</p>
             </div>
             <div className="analytics-card">
               <h3>
-                <AnimatedCounter end={400} suffix="+" />
+                <AnimatedCounter end={12} suffix="+" />
               </h3>
               <p>Happy Clients</p>
             </div>
             <div className="analytics-card">
               <h3>
-                <AnimatedCounter end={500} suffix="+" />
+                <AnimatedCounter end={18} suffix="+" />
               </h3>
               <p>Developers</p>
             </div>
             <div className="analytics-card">
               <h3>
-                <AnimatedCounter end={50} suffix="+" />
+                <AnimatedCounter end={9} suffix="+" />
               </h3>
               <p>Projects Delivered</p>
             </div>

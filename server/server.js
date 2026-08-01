@@ -15,8 +15,8 @@ const allowedOrigins = [
   "http://localhost:3000",
   "http://127.0.0.1:5173",
   "http://127.0.0.1:4173",
-  // Add your Render domain here after deployment
-  // e.g., "https://myportfolio.onrender.com"
+  "https://myportfolio.onrender.com",
+  // Add any custom domains here
 ];
 
 app.use(
@@ -62,9 +62,14 @@ const clientDistPath = path.join(__dirname, "..", "client", "dist");
 app.use(express.static(clientDistPath));
 
 // SPA fallback: serve index.html for any non-API request (client-side routing)
-app.get("*", (req, res, next) => {
+// Express 5 compatible (path-to-regexp v8 no longer supports bare "*" wildcard)
+app.use((req, res, next) => {
   // Skip API routes
   if (req.path.startsWith("/api/")) {
+    return next();
+  }
+  // Only handle GET/HEAD requests (let other methods fall through to 404)
+  if (req.method !== "GET" && req.method !== "HEAD") {
     return next();
   }
   res.sendFile(path.join(clientDistPath, "index.html"), (err) => {
@@ -74,7 +79,12 @@ app.get("*", (req, res, next) => {
   });
 });
 
-// Global error handling middleware
+// 404 handler for unknown API routes
+app.use((req, res) => {
+  res.status(404).json({ message: `Route ${req.originalUrl} not found` });
+});
+
+// Global error handling middleware (must always be registered last)
 app.use((err, req, res, next) => {
   console.error("Unhandled Error:", err.message || err);
   console.error("Error stack:", err.stack);
@@ -82,11 +92,6 @@ app.use((err, req, res, next) => {
     message: "Internal server error",
     error: process.env.NODE_ENV === "development" ? err.message : undefined,
   });
-});
-
-// 404 handler for unknown API routes
-app.use((req, res) => {
-  res.status(404).json({ message: `Route ${req.originalUrl} not found` });
 });
 
 const PORT = process.env.PORT || 5000;

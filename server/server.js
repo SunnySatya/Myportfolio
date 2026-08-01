@@ -1,4 +1,5 @@
 const path = require("path");
+const fs = require("fs");
 
 try {
   require("dotenv").config({ path: __dirname + "/.env" });
@@ -67,25 +68,35 @@ app.use("/api/admin", adminRouter);
 
 // ---- Serve React build in production ----
 const clientDistPath = path.join(__dirname, "..", "client", "dist");
-app.use(express.static(clientDistPath));
+const indexPath = path.join(clientDistPath, "index.html");
+const hasClientBuild = fs.existsSync(indexPath);
 
-// SPA fallback: serve index.html for any non-API request (client-side routing)
-// Express 5 compatible (path-to-regexp v8 no longer supports bare "*" wildcard)
-app.use((req, res, next) => {
-  // Skip API routes
-  if (req.path.startsWith("/api/")) {
-    return next();
-  }
-  // Only handle GET/HEAD requests (let other methods fall through to 404)
-  if (req.method !== "GET" && req.method !== "HEAD") {
-    return next();
-  }
-  res.sendFile(path.join(clientDistPath, "index.html"), (err) => {
-    if (err) {
-      next();
+if (hasClientBuild) {
+  app.use(express.static(clientDistPath));
+
+  // Express 5 safe catch-all for non-API routes
+  app.get(/^(?!\/api).*/, (req, res, next) => {
+    if (req.path.startsWith("/api/")) {
+      return next();
     }
+    if (req.method !== "GET" && req.method !== "HEAD") {
+      return next();
+    }
+
+    res.sendFile(indexPath, (err) => {
+      if (err) {
+        next(err);
+      }
+    });
   });
-});
+} else {
+  app.get(/^(?!\/api).*/, (req, res) => {
+    res.status(503).json({
+      message:
+        "Frontend build is missing. Run npm run build before starting the server.",
+    });
+  });
+}
 
 // 404 handler for unknown API routes
 app.use((req, res) => {

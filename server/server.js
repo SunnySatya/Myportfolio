@@ -1,5 +1,6 @@
 const path = require("path");
 const fs = require("fs");
+const { execSync } = require("child_process");
 
 try {
   require("dotenv").config({ path: __dirname + "/.env" });
@@ -69,7 +70,29 @@ app.use("/api/admin", adminRouter);
 // ---- Serve React build in production ----
 const clientDistPath = path.join(__dirname, "..", "client", "dist");
 const indexPath = path.join(clientDistPath, "index.html");
-const hasClientBuild = fs.existsSync(indexPath);
+
+let hasClientBuild = fs.existsSync(indexPath);
+
+if (!hasClientBuild) {
+  console.log(
+    "[deploy] Frontend build not found. Attempting to build client...",
+  );
+  try {
+    execSync("npm install --include=dev && npm run build", {
+      cwd: path.join(__dirname, "..", "client"),
+      stdio: "inherit",
+    });
+    hasClientBuild = fs.existsSync(indexPath);
+    if (hasClientBuild) {
+      console.log("[deploy] Frontend build completed successfully.");
+    }
+  } catch (buildError) {
+    console.error(
+      "[deploy] Failed to build frontend:",
+      buildError.message || buildError,
+    );
+  }
+}
 
 if (hasClientBuild) {
   app.use(express.static(clientDistPath));

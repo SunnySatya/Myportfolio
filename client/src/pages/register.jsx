@@ -40,7 +40,7 @@ const Register = () => {
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(user.email))
       newErrors.email = "Invalid email format";
     if (!user.phone.trim()) newErrors.phone = "Phone number is required";
-    else if (!/^\d{10,}$/.test(user.phone.replace(/[\s\-]/g, "")))
+    else if (!/^\d{10,}$/.test(user.phone.replace(/[\s-]/g, "")))
       newErrors.phone = "Enter a valid phone number";
     if (!user.password) newErrors.password = "Password is required";
     else if (user.password.length < 6)

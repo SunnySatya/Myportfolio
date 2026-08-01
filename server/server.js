@@ -1,5 +1,13 @@
 const path = require("path");
-require("dotenv").config({ path: __dirname + "/.env" });
+
+try {
+  require("dotenv").config({ path: __dirname + "/.env" });
+} catch (error) {
+  console.warn(
+    "dotenv not installed at runtime; continuing without .env file support.",
+  );
+}
+
 const express = require("express");
 const cors = require("cors");
 const app = express();

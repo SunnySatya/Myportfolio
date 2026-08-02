@@ -8,6 +8,12 @@ import {
   FaCss3Alt,
   FaNodeJs,
   FaDatabase,
+  FaCode,
+  FaServer,
+  FaGitAlt,
+  FaGithub,
+  FaWind,
+  FaSync,
 } from "react-icons/fa";
 import "./about.css";
 
@@ -23,7 +29,7 @@ const About = () => {
       color: "#1572b6",
     },
     {
-      name: "Node.js / Express",
+      name: "Node.js ",
       level: 78,
       icon: <FaNodeJs />,
       color: "#68a063",
@@ -34,6 +40,13 @@ const About = () => {
       icon: <FaDatabase />,
       color: "#47a248",
     },
+    { name: "TypeScript", level: 75, icon: <FaCode />, color: "#007acc" },
+    { name: "Express", level: 78, icon: <FaServer />, color: "#00cc88" },
+    { name: "Git", level: 75, icon: <FaGitAlt />, color: "#85cc00" },
+    { name: "Github", level: 75, icon: <FaGithub />, color: "#cc007e" },
+    { name: "Tailwind css", level: 73, icon: <FaWind />, color: "#8b00cc" },
+    { name: "Redux", level: 77, icon: <FaSync />, color: "#11cc00" },
+    { name: "Axios", level: 77, icon: <FaCode />, color: "#ccb800" },
   ];
 
   const timeline = [

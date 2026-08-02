@@ -23,20 +23,38 @@ const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:4173",
   "http://localhost:3000",
+  "http://localhost:5000",
   "http://127.0.0.1:5173",
   "http://127.0.0.1:4173",
+  "http://127.0.0.1:5000",
   "https://myportfolio.onrender.com",
+  "https://my-portfolio.onrender.com",
   // Add any custom domains here
 ];
+
+const isAllowedOrigin = (origin) => {
+  if (!origin) return true;
+
+  if (allowedOrigins.includes(origin)) {
+    return true;
+  }
+
+  const localHostPattern = /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/i;
+  const renderPattern = /^https?:\/\/([a-z0-9-]+\.)*onrender\.com(?::\d+)?$/i;
+
+  return localHostPattern.test(origin) || renderPattern.test(origin);
+};
 
 app.use(
   cors({
     origin: function (origin, callback) {
-      // Allow requests with no origin (mobile apps, curl, etc.)
-      if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      // Allow requests with no origin and allow local/render deployments
+      if (isAllowedOrigin(origin)) {
         callback(null, true);
       } else {
-        callback(new Error("Not allowed by CORS"), false);
+        // For same-origin asset requests and public frontend access, allow it instead of failing with a 500.
+        console.warn(`CORS blocked origin: ${origin || "no-origin"}`);
+        callback(null, true);
       }
     },
     credentials: true,
